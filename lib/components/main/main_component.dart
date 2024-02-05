@@ -19,7 +19,7 @@ class MainComponent extends StatelessWidget {
             Obx(() => controller.showFileExplorer.value
                 ? const FileExplorerComponent()
                 : Container()),
-            const EditorComponent()
+            EditorComponent()
           ],
         ),
       );

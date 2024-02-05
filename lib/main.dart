@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_text_editor/shared/colors.dart';
 import 'package:get/get.dart';
 import 'package:flutter_simple_text_editor/shared/routes.dart';
 
@@ -13,8 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Theme.of(context).primaryCustomColor),
         useMaterial3: true,
       ),
       initialRoute: Routes.mainRoute,
