@@ -13,12 +13,12 @@ class EditorComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EditorController>(builder: (controller) {
-      return Expanded(
-        child: Obx(() {
-          if (controller.getOpened(controller.openedFile.value) == null) {
-            return const EmptyEditor();
-          } else {
-            return Container(
+      return Obx(() {
+        if (controller.getOpened(controller.openedFile.value) == null) {
+          return const EmptyEditor();
+        } else {
+          return Expanded(
+            child: Container(
               color: Theme.of(context).editorBackground,
               child: Column(
                 children: [
@@ -72,10 +72,10 @@ class EditorComponent extends StatelessWidget {
                       )),
                 ],
               ),
-            );
-          }
-        }),
-      );
+            ),
+          );
+        }
+      });
     });
   }
 
