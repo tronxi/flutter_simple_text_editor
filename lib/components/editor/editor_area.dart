@@ -12,28 +12,30 @@ class EditorArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => CustomPaint(
-          foregroundPainter: _EditorAreaPainter(
-              backgroundColor: Theme.of(context).primaryCustomColor,
-              lineNumberColor: Theme.of(context).fileExplorerBorder,
-              editorController: editorController,
-              fileModel: fileModel),
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
-            child: TextField(
-              onChanged: (String string) {
-                editorController.updateNeedSave(string);
-              },
-              maxLines: null,
-              controller: editorController
-                  .getOpened(editorController.openedFile.value)!
-                  .currentFileController
-                  .value,
-              style: TextStyle(
-                  color: Theme.of(context).editorFontColor, fontSize: 12),
+    return Obx(() => RepaintBoundary(
+      child: CustomPaint(
+            foregroundPainter: _EditorAreaPainter(
+                backgroundColor: Theme.of(context).primaryCustomColor,
+                lineNumberColor: Theme.of(context).fileExplorerBorder,
+                editorController: editorController,
+                fileModel: fileModel),
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
+              child: TextField(
+                onChanged: (String string) {
+                  editorController.updateNeedSave(string);
+                },
+                maxLines: null,
+                controller: editorController
+                    .getOpened(editorController.openedFile.value)!
+                    .currentFileController
+                    .value,
+                style: TextStyle(
+                    color: Theme.of(context).editorFontColor, fontSize: 12),
+              ),
             ),
           ),
-        ));
+    ));
   }
 }
 
