@@ -10,14 +10,13 @@ class EditorController extends GetxController {
 
   void setCurrentFile(FileModel current) async {
     openedFile.value = current;
-    if(openedFiles[openedFile.value] == null) {
+    if (openedFiles[openedFile.value] == null) {
       openedFiles.putIfAbsent(current, () => FileController());
       openedFiles[current]?.setCurrentFileForFirstTime(current);
     } else {
       openedFiles.putIfAbsent(current, () => FileController());
       openedFiles[current]?.setCurrentFileForOpenedFile(current);
     }
-
   }
 
   void updateNeedSave(String newText) {
