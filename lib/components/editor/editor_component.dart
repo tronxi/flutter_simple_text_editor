@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_simple_text_editor/components/editor/editor_area.dart';
 import 'package:flutter_simple_text_editor/components/editor/empty_editor.dart';
 import 'package:flutter_simple_text_editor/shared/colors.dart';
 import 'package:get/get.dart';
@@ -41,35 +42,26 @@ class EditorComponent extends StatelessWidget {
                                     ? FontStyle.italic
                                     : null)),
                       )),
-                  Obx(() => Expanded(
-                        child: CallbackShortcuts(
-                          bindings: <ShortcutActivator, VoidCallback>{
-                            LogicalKeySet(LogicalKeyboardKey.metaRight,
-                                LogicalKeyboardKey.keyS): () {
-                              _save();
-                            },
-                            LogicalKeySet(LogicalKeyboardKey.control,
-                                LogicalKeyboardKey.keyS): () {
-                              _save();
-                            },
-                          },
-                          child: SingleChildScrollView(
-                            child: TextField(
-                              onChanged: (String string) {
-                                controller.updateNeedSave(string);
-                              },
-                              maxLines: null,
-                              controller: controller
-                                  .getOpened(controller.openedFile.value)!
-                                  .currentFileController
-                                  .value,
-                              style: TextStyle(
-                                  color: Theme.of(context).editorFontColor,
-                                  fontSize: 12),
-                            ),
-                          ),
+                  Expanded(
+                    child: CallbackShortcuts(
+                      bindings: <ShortcutActivator, VoidCallback>{
+                        LogicalKeySet(LogicalKeyboardKey.metaRight,
+                            LogicalKeyboardKey.keyS): () {
+                          _save();
+                        },
+                        LogicalKeySet(LogicalKeyboardKey.control,
+                            LogicalKeyboardKey.keyS): () {
+                          _save();
+                        },
+                      },
+                      child: SingleChildScrollView(
+                        child: EditorArea(
+                          editorController: controller,
+                          fileModel: controller.openedFile.value,
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
