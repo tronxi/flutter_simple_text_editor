@@ -27,6 +27,10 @@ class EditorController extends GetxController {
     openedFiles[openedFile.value]?.save();
   }
 
+  void setCurrentOffset(int offset) {
+    openedFiles[openedFile.value]?.setCurrentOffset(offset);
+  }
+
   FileController? getOpened(FileModel opened) {
     return openedFiles[opened];
   }
