@@ -50,19 +50,37 @@ class _OpenedFileItem extends StatelessWidget {
                   width: 1.0, color: Theme.of(context).fileExplorerBorder)),
         ),
         height: 40,
-        child: Center(
-          child: Obx(() => Text(
-                fileModel.relativePath,
-                style: TextStyle(
-                    color: Theme.of(context).editorFontColor,
-                    fontStyle:
-                        editorController.getOpened(fileModel)!.needSave.value
-                            ? FontStyle.italic
-                            : null),
-              )),
-        ),
+        child: Obx(() => Row(
+              children: [
+                Text(
+                  fileModel.relativePath,
+                  style: TextStyle(
+                      color: Theme.of(context).editorFontColor,
+                      fontStyle:
+                          editorController.getOpened(fileModel)!.needSave.value
+                              ? FontStyle.italic
+                              : null),
+                ),
+                const SizedBox(width: 10),
+                IconButton(
+                    onPressed: _onClosed,
+                    icon: Container(
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.close_sharp,
+                        size: 12,
+                        color: Theme.of(context).editorFontColor,
+                      ),
+                    ),
+                    padding: EdgeInsets.zero)
+              ],
+            )),
       ),
     );
+  }
+
+  void _onClosed() {
+    editorController.closeOpenFile(fileModel);
   }
 
   void _onTap() {

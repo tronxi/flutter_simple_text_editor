@@ -17,6 +17,7 @@ class EditorController extends GetxController {
       openedFiles.putIfAbsent(current, () => FileController());
       openedFiles[current]?.setCurrentFileForOpenedFile(current);
     }
+    update();
   }
 
   void updateNeedSave(String newText) {
@@ -41,5 +42,15 @@ class EditorController extends GetxController {
 
   bool isCurrentOpened(FileModel fileModel) {
     return fileModel == openedFile.value;
+  }
+
+  void closeOpenFile(FileModel fileModel) {
+    if(fileModel == openedFile.value && openedFiles.keys.length > 1){
+      openedFiles.remove(fileModel);
+      setCurrentFile(openedFiles.keys.first);
+    } else {
+      openedFiles.remove(fileModel);
+    }
+    update();
   }
 }

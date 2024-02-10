@@ -21,7 +21,7 @@ class FileExplorerButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-              fontSize: 10, color: Theme.of(context).editorFontColor),
+              fontSize: 14, color: Theme.of(context).editorFontColor),
         ));
   }
 }
