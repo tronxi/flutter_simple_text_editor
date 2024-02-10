@@ -36,6 +36,7 @@ class _FileExplorerComponentState extends State<FileExplorerComponent> {
         ),
         child: Column(children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FileExplorerButton(
                   text: "Open Folder", onPressed: _onPressOpenFolder),
