@@ -5,7 +5,8 @@ import 'package:flutter_simple_text_editor/shared/file_system_manager.dart';
 
 class FileController {
   FileSystemManager fileSystemManager = FileSystemManager();
-  var currentFile = FileModel(absolutePath: "", relativePath: " ").obs;
+  var currentFile =
+      FileModel(absolutePath: "", relativePath: " ", isDirectory: false).obs;
   var currentFileContent = "";
   var currentOffset = 0.obs;
   var currentFileController = TextEditingController().obs;

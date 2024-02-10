@@ -1,5 +1,9 @@
 class FileModel {
   final String absolutePath;
   final String relativePath;
-  FileModel({required this.absolutePath, required this.relativePath});
+  final bool isDirectory;
+  FileModel(
+      {required this.absolutePath,
+      required this.relativePath,
+      required this.isDirectory});
 }

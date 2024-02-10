@@ -57,5 +57,3 @@ class EditorArea extends StatelessWidget {
     ));
   }
 }
-
-

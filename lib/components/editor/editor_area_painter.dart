@@ -12,11 +12,11 @@ class EditorAreaPainter extends CustomPainter {
 
   const EditorAreaPainter(
       {required this.backgroundColor,
-        required this.lineNumberColor,
-        required this.editorController,
-        required this.selectedLineColor,
-        required this.currentOffset,
-        required this.fileModel});
+      required this.lineNumberColor,
+      required this.editorController,
+      required this.selectedLineColor,
+      required this.currentOffset,
+      required this.fileModel});
 
   @override
   void paint(Canvas canvas, Size size) {

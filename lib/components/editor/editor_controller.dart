@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 class EditorController extends GetxController {
   Map<FileModel, FileController> openedFiles = {};
   FileSystemManager fileSystemManager = FileSystemManager();
-  var openedFile = FileModel(absolutePath: "", relativePath: " ").obs;
+  var openedFile =
+      FileModel(absolutePath: "", relativePath: " ", isDirectory: false).obs;
 
   void setCurrentFile(FileModel current) async {
     openedFile.value = current;
@@ -45,7 +46,7 @@ class EditorController extends GetxController {
   }
 
   void closeOpenFile(FileModel fileModel) {
-    if(fileModel == openedFile.value && openedFiles.keys.length > 1){
+    if (fileModel == openedFile.value && openedFiles.keys.length > 1) {
       openedFiles.remove(fileModel);
       setCurrentFile(openedFiles.keys.first);
     } else {

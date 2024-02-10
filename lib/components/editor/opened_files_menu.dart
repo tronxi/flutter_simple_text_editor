@@ -31,7 +31,7 @@ class _OpenedFileItem extends StatelessWidget {
   final EditorController editorController;
   final FileModel fileModel;
   const _OpenedFileItem(
-      {super.key, required this.editorController, required this.fileModel});
+      {required this.editorController, required this.fileModel});
 
   @override
   Widget build(BuildContext context) {

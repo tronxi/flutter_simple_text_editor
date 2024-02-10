@@ -21,8 +21,11 @@ class FileSystemManager {
     await for (var entity
         in systemTempDir.list(recursive: true, followLinks: false)) {
       String relativePath = path.relative(entity.path, from: selectedDirectory);
-      files.add(
-          FileModel(absolutePath: entity.path, relativePath: relativePath));
+      bool isFile = entity is Directory;
+      files.add(FileModel(
+          absolutePath: entity.path,
+          relativePath: relativePath,
+          isDirectory: isFile));
     }
     return files;
   }

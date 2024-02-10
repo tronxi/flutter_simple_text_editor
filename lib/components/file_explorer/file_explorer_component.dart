@@ -41,8 +41,7 @@ class _FileExplorerComponentState extends State<FileExplorerComponent> {
               FileExplorerButton(
                   text: "Open Folder", onPressed: _onPressOpenFolder),
               const SizedBox(width: 10),
-              FileExplorerButton(
-                  text: "Refresh", onPressed: _onPressRefresh),
+              FileExplorerButton(text: "Refresh", onPressed: _onPressRefresh),
               const SizedBox(width: 10),
             ],
           ),
