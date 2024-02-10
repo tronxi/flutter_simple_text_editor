@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_area.dart';
 import 'package:flutter_simple_text_editor/components/editor/empty_editor.dart';
+import 'package:flutter_simple_text_editor/components/editor/opened_files_menu.dart';
 import 'package:flutter_simple_text_editor/shared/colors.dart';
 import 'package:get/get.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_controller.dart';
@@ -23,25 +24,7 @@ class EditorComponent extends StatelessWidget {
               color: Theme.of(context).editorBackground,
               child: Column(
                 children: [
-                  Obx(() => Container(
-                        padding: const EdgeInsets.all(5),
-                        alignment: Alignment.topLeft,
-                        color: Theme.of(context).editorFileTab,
-                        child: Text(
-                            controller
-                                .getOpened(controller.openedFile.value)!
-                                .currentFile
-                                .value
-                                .relativePath,
-                            style: TextStyle(
-                                color: Theme.of(context).editorFontColor,
-                                fontStyle: controller
-                                        .getOpened(controller.openedFile.value)!
-                                        .needSave
-                                        .value
-                                    ? FontStyle.italic
-                                    : null)),
-                      )),
+                  const OpenedFilesMenu(),
                   Expanded(
                     child: CallbackShortcuts(
                       bindings: <ShortcutActivator, VoidCallback>{

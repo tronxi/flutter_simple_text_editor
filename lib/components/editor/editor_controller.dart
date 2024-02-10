@@ -34,4 +34,12 @@ class EditorController extends GetxController {
   FileController? getOpened(FileModel opened) {
     return openedFiles[opened];
   }
+
+  List<FileModel> retrieveOpenedFilesNames(FileModel opened) {
+    return openedFiles.keys.toList();
+  }
+
+  bool isCurrentOpened(FileModel fileModel) {
+    return fileModel == openedFile.value;
+  }
 }
