@@ -63,7 +63,7 @@ class EditorAreaPainter extends CustomPainter {
   }
 
   double _calculateLineNumberPosition(TextPainter textPainter, int i) {
-    const lineHeight = 14;
+    const lineHeight = 13;
     const offset = 4;
     final textHeight = textPainter.height;
     double y = (lineHeight * i) + (lineHeight / 2) - (textHeight / 2);
@@ -71,7 +71,7 @@ class EditorAreaPainter extends CustomPainter {
   }
 
   double _calculateSelectedLineNumberPosition(int i) {
-    const lineHeight = 14;
+    const lineHeight = 13;
     const offset = 4;
     double y = (lineHeight * i) + (lineHeight / 2);
     return y - offset;
