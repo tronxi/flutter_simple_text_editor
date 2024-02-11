@@ -27,7 +27,7 @@ class EditorAreaPainter extends CustomPainter {
     double y = _calculateSelectedLineNumberPosition(lineNumber);
     final Paint paint = Paint()
       ..color = selectedLineColor
-      ..strokeWidth = 18;
+      ..strokeWidth = 16;
     final Offset start = Offset(0, y);
     final Offset end = Offset(size.width, y);
     canvas.drawLine(start, end, paint);

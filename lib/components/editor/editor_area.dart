@@ -39,18 +39,25 @@ class EditorArea extends StatelessWidget {
                 editorController.getOpened(fileModel)!.currentOffset.value,
             fileModel: fileModel),
         child: Container(
-          padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
+          padding: const EdgeInsets.fromLTRB(50, 12, 0, 12),
           child: TextField(
             onChanged: (String string) {
               editorController.updateNeedSave(string);
             },
             maxLines: null,
+            minLines: 10,
             controller: editorController
                 .getOpened(editorController.openedFile.value)!
                 .currentFileController
                 .value,
             style: TextStyle(
-                color: Theme.of(context).editorFontColor, fontSize: 12),
+                color: Theme.of(context).editorFontColor,
+                fontSize: 12,
+                leadingDistribution: TextLeadingDistribution.proportional),
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              border: InputBorder.none
+            ),
           ),
         ),
       ),
