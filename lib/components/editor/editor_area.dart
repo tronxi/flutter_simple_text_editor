@@ -53,11 +53,12 @@ class EditorArea extends StatelessWidget {
             style: TextStyle(
                 color: Theme.of(context).editorFontColor,
                 fontSize: 12,
+                letterSpacing: 0.5,
+                height: 1.5,
+                fontWeight: FontWeight.normal,
                 leadingDistribution: TextLeadingDistribution.proportional),
             decoration: const InputDecoration(
-              contentPadding: EdgeInsets.zero,
-              border: InputBorder.none
-            ),
+                contentPadding: EdgeInsets.zero, border: InputBorder.none),
           ),
         ),
       ),

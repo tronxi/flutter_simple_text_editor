@@ -38,6 +38,7 @@ class _FileItemState extends State<FileItem> {
             Text(widget.fileNode.value.relativePath,
                 style: TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.bold,
                     color: isHover
                         ? Theme.of(context).fileExplorerItemSelected
                         : Theme.of(context).fileExplorerItemUnselected)),

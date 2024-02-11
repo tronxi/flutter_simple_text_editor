@@ -43,6 +43,7 @@ class _DirectoryItemState extends State<DirectoryItem> {
                         : Theme.of(context).fileExplorerItemUnselected)),
             Text(widget.fileNode.value.relativePath,
                 style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     fontSize: 16,
                     color: isHover
                         ? Theme.of(context).fileExplorerItemSelected

@@ -56,6 +56,7 @@ class _OpenedFileItem extends StatelessWidget {
                   fileModel.relativePath,
                   style: TextStyle(
                       color: Theme.of(context).editorFontColor,
+                      fontWeight: FontWeight.bold,
                       fontStyle:
                           editorController.getOpened(fileModel)!.needSave.value
                               ? FontStyle.italic

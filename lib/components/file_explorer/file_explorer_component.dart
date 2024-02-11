@@ -26,7 +26,6 @@ class _FileExplorerComponentState extends State<FileExplorerComponent> {
   Widget build(BuildContext context) {
     return GetBuilder<FileExplorerController>(builder: (controller) {
       return Container(
-        width: 240,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Theme.of(context).fileExplorerBackground,

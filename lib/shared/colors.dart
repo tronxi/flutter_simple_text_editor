@@ -38,7 +38,7 @@ extension Colors on ThemeData {
   }
 
   Color get editorBackgroundSelectedLine {
-    return const Color.fromRGBO(9, 12, 13, 0.50);
+    return const Color.fromRGBO(9, 12, 13, 0.3);
   }
 
   Color get editorFontColor {
