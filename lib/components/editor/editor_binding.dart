@@ -5,5 +5,4 @@ class EditorBinding implements Bindings {
   void dependencies() {
     Get.lazyPut(() => EditorBinding());
   }
-
 }

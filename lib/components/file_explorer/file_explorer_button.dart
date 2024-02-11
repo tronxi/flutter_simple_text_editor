@@ -20,8 +20,8 @@ class FileExplorerButton extends StatelessWidget {
                     borderRadius: BorderRadius.circular(0)))),
         child: Text(
           text,
-          style: TextStyle(
-              fontSize: 14, color: Theme.of(context).editorFontColor),
+          style:
+              TextStyle(fontSize: 14, color: Theme.of(context).editorFontColor),
         ));
   }
 }

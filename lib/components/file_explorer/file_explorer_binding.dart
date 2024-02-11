@@ -6,5 +6,4 @@ class FileExplorerBinding implements Bindings {
   void dependencies() {
     Get.lazyPut(() => FileExplorerController());
   }
-
 }

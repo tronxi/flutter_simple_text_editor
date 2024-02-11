@@ -4,15 +4,15 @@ import 'package:get/get.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_controller.dart';
 import 'package:flutter_simple_text_editor/shared/colors.dart';
 
-class FileItem extends StatefulWidget {
+class DirectoryItem extends StatefulWidget {
   final FileNode fileNode;
-  const FileItem({super.key, required this.fileNode});
+  const DirectoryItem({super.key, required this.fileNode});
 
   @override
-  State<FileItem> createState() => _FileItemState();
+  State<DirectoryItem> createState() => _DirectoryItemState();
 }
 
-class _FileItemState extends State<FileItem> {
+class _DirectoryItemState extends State<DirectoryItem> {
   bool isHover = false;
 
   @override
@@ -33,6 +33,11 @@ class _FileItemState extends State<FileItem> {
       child: Row(
         children: [
           SizedBox(width: widget.fileNode.depth * 20.0),
+          Text("> ",
+              style: TextStyle(
+                  color: isHover
+                      ? Theme.of(context).fileExplorerItemSelected
+                      : Theme.of(context).fileExplorerItemUnselected)),
           Text(widget.fileNode.value.relativePath,
               style: TextStyle(
                   fontSize: 16,

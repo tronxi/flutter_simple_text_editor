@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_text_editor/components/file_explorer/directory_item.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_explorer_button.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_item.dart';
+import 'package:flutter_simple_text_editor/components/file_explorer/file_node.dart';
 import 'package:get/get.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_explorer_controller.dart';
 import 'package:flutter_simple_text_editor/shared/colors.dart';
@@ -56,16 +58,34 @@ class _FileExplorerComponentState extends State<FileExplorerComponent> {
             color: Theme.of(context).fileExplorerBorder,
           ),
           Obx(() => Expanded(
-                child: ListView.builder(
-                  itemCount: controller.currentFiles.length,
-                  itemBuilder: (context, index) {
-                    return FileItem(file: controller.currentFiles[index]);
-                  },
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:
+                          _retrieveFiles(controller.currentFilesTree.value),
+                    ),
+                  ),
                 ),
               ))
         ]),
       );
     });
+  }
+
+  List<Widget> _retrieveFiles(FileNode parent) {
+    List<Widget> widgets = [];
+    for (var fileNode in parent.children) {
+      if (!fileNode.value.isDirectory) {
+        widgets.add(FileItem(fileNode: fileNode));
+      } else {
+        widgets.add(DirectoryItem(fileNode: fileNode));
+        widgets.addAll(_retrieveFiles(fileNode));
+      }
+    }
+    return widgets;
   }
 
   void _onPressRefresh() {
