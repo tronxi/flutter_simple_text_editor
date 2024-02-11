@@ -6,7 +6,7 @@ import 'package:flutter_simple_text_editor/shared/file_system_manager.dart';
 class FileExplorerController extends GetxController {
   FileSystemManager fileSystemManager = FileSystemManager();
   var currentFilesTree = FileNode(
-          FileModel(absolutePath: "", relativePath: "", isDirectory: false), 0)
+          FileModel(absolutePath: "", relativePath: "", isDirectory: false), 0, false)
       .obs;
 
   var selectedDirectoryName = "".obs;
@@ -22,7 +22,7 @@ class FileExplorerController extends GetxController {
           absolutePath: directoryPath,
           relativePath: directoryPath,
           isDirectory: true);
-      FileNode parentNode = FileNode(parent, 0);
+      FileNode parentNode = FileNode(parent, 0, false);
       await retrieveFilesInDirectory(parentNode, parentNode.depth);
       currentFilesTree.value = parentNode;
     }
@@ -33,10 +33,10 @@ class FileExplorerController extends GetxController {
         await fileSystemManager.retrieveFiles(fileNode.value.absolutePath);
     for (var file in filesInDirectory) {
       if (!file.isDirectory) {
-        FileNode newFileNode = FileNode(file, depth);
+        FileNode newFileNode = FileNode(file, depth, false);
         fileNode.add(newFileNode);
       } else {
-        FileNode newFileNode = FileNode(file, depth);
+        FileNode newFileNode = FileNode(file, depth, false);
         fileNode.add(newFileNode);
         await retrieveFilesInDirectory(newFileNode, depth + 1);
       }
@@ -48,5 +48,10 @@ class FileExplorerController extends GetxController {
       // currentFiles.value =
       //     await fileSystemManager.retrieveFiles(selectedPath.value);
     }
+  }
+
+  void toggleShowChildren(FileNode fileNode) {
+    fileNode.showChildren = !fileNode.showChildren;
+    update();
   }
 }

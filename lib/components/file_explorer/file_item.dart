@@ -30,16 +30,19 @@ class _FileItemState extends State<FileItem> {
           isHover = value;
         });
       },
-      child: Row(
-        children: [
-          SizedBox(width: widget.fileNode.depth * 20.0),
-          Text(widget.fileNode.value.relativePath,
-              style: TextStyle(
-                  fontSize: 16,
-                  color: isHover
-                      ? Theme.of(context).fileExplorerItemSelected
-                      : Theme.of(context).fileExplorerItemUnselected)),
-        ],
+      child: Container(
+        constraints: const BoxConstraints(minWidth: 240),
+        child: Row(
+          children: [
+            SizedBox(width: widget.fileNode.depth * 20.0),
+            Text(widget.fileNode.value.relativePath,
+                style: TextStyle(
+                    fontSize: 16,
+                    color: isHover
+                        ? Theme.of(context).fileExplorerItemSelected
+                        : Theme.of(context).fileExplorerItemUnselected)),
+          ],
+        ),
       ),
     );
   }
