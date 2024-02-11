@@ -6,7 +6,9 @@ import 'package:flutter_simple_text_editor/shared/file_system_manager.dart';
 class FileExplorerController extends GetxController {
   FileSystemManager fileSystemManager = FileSystemManager();
   var currentFilesTree = FileNode(
-          FileModel(absolutePath: "", relativePath: "", isDirectory: false), 0, false)
+          FileModel(absolutePath: "", relativePath: "", isDirectory: false),
+          0,
+          false)
       .obs;
 
   var selectedDirectoryName = "".obs;
@@ -45,8 +47,13 @@ class FileExplorerController extends GetxController {
 
   void refreshFiles() async {
     if (selectedPath.value != "") {
-      // currentFiles.value =
-      //     await fileSystemManager.retrieveFiles(selectedPath.value);
+      FileModel parent = FileModel(
+          absolutePath: selectedPath.value,
+          relativePath: selectedPath.value,
+          isDirectory: true);
+      FileNode parentNode = FileNode(parent, 0, false);
+      await retrieveFilesInDirectory(parentNode, parentNode.depth);
+      currentFilesTree.value = parentNode;
     }
   }
 

@@ -82,7 +82,7 @@ class _FileExplorerComponentState extends State<FileExplorerComponent> {
         widgets.add(FileItem(fileNode: fileNode));
       } else {
         widgets.add(DirectoryItem(fileNode: fileNode));
-        if(fileNode.showChildren) {
+        if (fileNode.showChildren) {
           widgets.addAll(_retrieveFiles(fileNode));
         }
       }
