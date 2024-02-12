@@ -49,4 +49,9 @@ class FileSystemManager {
     File file = File(filePath);
     file.writeAsString(newText);
   }
+
+  void removeFile(String filePath) {
+    File file = File(filePath);
+    file.deleteSync(recursive: true);
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_simple_text_editor/components/editor/file_controller.dart';
+import 'package:flutter_simple_text_editor/components/file_explorer/file_node.dart';
 import 'package:flutter_simple_text_editor/shared/file_model.dart';
 import 'package:flutter_simple_text_editor/shared/file_system_manager.dart';
 import 'package:get/get.dart';
@@ -53,5 +54,15 @@ class EditorController extends GetxController {
       openedFiles.remove(fileModel);
     }
     update();
+  }
+
+  void closeOpenDirectory(FileNode fileNode) {
+    if(!fileNode.value.isDirectory) {
+      closeOpenFile(fileNode.value);
+    } else {
+      for(var child in fileNode.children) {
+        closeOpenDirectory(child);
+      }
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_text_editor/components/file_explorer/file_explorer_controller.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_node.dart';
 import 'package:get/get.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_controller.dart';
@@ -24,6 +25,7 @@ class _FileItemState extends State<FileItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onSecondaryTap: _showContextualFileMenu,
       onTap: _onSelectItem,
       onHover: (value) {
         setState(() {
@@ -46,6 +48,50 @@ class _FileItemState extends State<FileItem> {
         ),
       ),
     );
+  }
+
+  void _showContextualFileMenu() {
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
+    final RenderBox referenceBox = context.findRenderObject() as RenderBox;
+    final Offset offset = referenceBox.localToGlobal(Offset.zero);
+
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        offset,
+        offset.translate(referenceBox.size.width, referenceBox.size.height),
+      ),
+      Offset.zero & overlay.size,
+    );
+    showMenu(
+        context: context,
+        position: position,
+        color: Theme.of(context).editorBackground,
+        items: [
+          PopupMenuItem(
+            onTap: _onDelete,
+            child: Text("Delete",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).editorFontColor)),
+          ),
+          // PopupMenuItem(
+          //   child: Text("Rename",
+          //       style: TextStyle(
+          //           fontWeight: FontWeight.bold,
+          //           color: Theme.of(context).editorFontColor)),
+          // ),
+        ]);
+  }
+
+  void _onDelete() {
+    FileExplorerController fileExplorerController =
+        Get.put(FileExplorerController());
+    EditorController editorController = Get.put(EditorController());
+
+    fileExplorerController.removeFile(widget.fileNode);
+    fileExplorerController.refreshFiles();
+    editorController.closeOpenFile(widget.fileNode.value);
   }
 
   void _onSelectItem() {

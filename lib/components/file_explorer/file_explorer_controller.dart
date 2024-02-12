@@ -61,4 +61,8 @@ class FileExplorerController extends GetxController {
     fileNode.showChildren = !fileNode.showChildren;
     update();
   }
+
+  void removeFile(FileNode fileNode) {
+    fileSystemManager.removeFile(fileNode.value.absolutePath);
+  }
 }
