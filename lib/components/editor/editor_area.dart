@@ -38,27 +38,33 @@ class EditorArea extends StatelessWidget {
             currentOffset:
                 editorController.getOpened(fileModel)!.currentOffset.value,
             fileModel: fileModel),
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(50, 12, 0, 12),
-          child: TextField(
-            onChanged: (String string) {
-              editorController.updateNeedSave(string);
-            },
-            maxLines: null,
-            minLines: 10,
-            controller: editorController
-                .getOpened(editorController.openedFile.value)!
-                .currentFileController
-                .value,
-            style: TextStyle(
-                color: Theme.of(context).editorFontColor,
-                fontSize: 12,
-                letterSpacing: 0.5,
-                height: 1.5,
-                fontWeight: FontWeight.normal,
-                leadingDistribution: TextLeadingDistribution.proportional),
-            decoration: const InputDecoration(
-                contentPadding: EdgeInsets.zero, border: InputBorder.none),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: IntrinsicWidth(
+            stepWidth: 1000,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(50, 12, 0, 12),
+              child: TextField(
+                onChanged: (String string) {
+                  editorController.updateNeedSave(string);
+                },
+                maxLines: null,
+                minLines: 10,
+                controller: editorController
+                    .getOpened(editorController.openedFile.value)!
+                    .currentFileController
+                    .value,
+                style: TextStyle(
+                    color: Theme.of(context).editorFontColor,
+                    fontSize: 12,
+                    letterSpacing: 0.5,
+                    height: 1.5,
+                    fontWeight: FontWeight.normal,
+                    leadingDistribution: TextLeadingDistribution.proportional),
+                decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.zero, border: InputBorder.none),
+              ),
+            ),
           ),
         ),
       ),
