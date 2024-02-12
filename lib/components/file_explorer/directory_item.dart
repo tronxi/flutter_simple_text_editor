@@ -75,19 +75,43 @@ class _DirectoryItemState extends State<DirectoryItem> {
         color: Theme.of(context).editorBackground,
         items: [
           PopupMenuItem(
+            onTap: _onNewFile,
+            child: Text("New File",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).editorFontColor)),
+          ),
+          PopupMenuItem(
+            onTap: () => {},
+            child: Text("New Folder",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).editorFontColor)),
+          ),
+          const PopupMenuItem(
+              child: PopupMenuDivider(
+            height: 1,
+          )),
+          PopupMenuItem(
+            child: Text("Rename",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).editorFontColor)),
+          ),
+          PopupMenuItem(
             onTap: _onDelete,
             child: Text("Delete",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).editorFontColor)),
-          ),
-          // PopupMenuItem(
-          //   child: Text("Rename",
-          //       style: TextStyle(
-          //           fontWeight: FontWeight.bold,
-          //           color: Theme.of(context).editorFontColor)),
-          // ),
+          )
         ]);
+  }
+
+  void _onNewFile() {
+    FileExplorerController fileExplorerController =
+        Get.put(FileExplorerController());
+    fileExplorerController.createFile(widget.fileNode, "fileName"); //TODO create dialog for fileName
   }
 
   void _onDelete() {
