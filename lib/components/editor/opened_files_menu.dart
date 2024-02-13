@@ -87,13 +87,13 @@ class _OpenedFileItem extends StatelessWidget {
 
   void _onClosed(BuildContext context) {
     if (editorController.getOpened(fileModel)!.needSave.value) {
-      _closeDialogBuilder(context);
+      _showCloseDialogBuilder(context);
     } else {
       editorController.closeOpenFile(fileModel);
     }
   }
 
-  Future<void> _closeDialogBuilder(BuildContext context) {
+  Future<void> _showCloseDialogBuilder(BuildContext context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {

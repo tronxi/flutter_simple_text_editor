@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_simple_text_editor/components/file_explorer/file_node.dart';
 import 'package:flutter_simple_text_editor/shared/file_model.dart';
 import 'package:path/path.dart' as path;
 
@@ -53,5 +54,14 @@ class FileSystemManager {
   void removeFile(String filePath) {
     File file = File(filePath);
     file.deleteSync(recursive: true);
+  }
+
+  FileNode createFile(FileNode fileNode, String fileName) {
+    String newFilePath = path.join(fileNode.value.absolutePath, fileName);
+    File newFile = File(newFilePath);
+    newFile.createSync();
+    FileModel fileModel = FileModel(
+        absolutePath: newFilePath, relativePath: fileName, isDirectory: false);
+    return FileNode(fileModel, fileNode.depth + 1, false);
   }
 }

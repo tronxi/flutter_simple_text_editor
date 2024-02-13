@@ -65,4 +65,10 @@ class FileExplorerController extends GetxController {
   void removeFile(FileNode fileNode) {
     fileSystemManager.removeFile(fileNode.value.absolutePath);
   }
+
+  void createFile(FileNode fileNode, String fileName) {
+    FileNode newFileNode = fileSystemManager.createFile(fileNode, fileName);
+    fileNode.add(newFileNode);
+    update();
+  }
 }

@@ -69,18 +69,18 @@ class _FileItemState extends State<FileItem> {
         color: Theme.of(context).editorBackground,
         items: [
           PopupMenuItem(
+            child: Text("Rename",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).editorFontColor)),
+          ),
+          PopupMenuItem(
             onTap: _onDelete,
             child: Text("Delete",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).editorFontColor)),
-          ),
-          // PopupMenuItem(
-          //   child: Text("Rename",
-          //       style: TextStyle(
-          //           fontWeight: FontWeight.bold,
-          //           color: Theme.of(context).editorFontColor)),
-          // ),
+          )
         ]);
   }
 
