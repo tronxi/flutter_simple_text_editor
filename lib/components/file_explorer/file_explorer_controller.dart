@@ -6,9 +6,11 @@ import 'package:flutter_simple_text_editor/shared/file_system_manager.dart';
 class FileExplorerController extends GetxController {
   FileSystemManager fileSystemManager = FileSystemManager();
   var currentFilesTree = FileNode(
-          FileModel(absolutePath: "", relativePath: "", isDirectory: false),
-          0,
-          false)
+          value:
+              FileModel(absolutePath: "", relativePath: "", isDirectory: false),
+          depth: 0,
+          showChildren: false,
+          markAsDeleted: false)
       .obs;
 
   var selectedDirectoryName = "".obs;
@@ -24,7 +26,8 @@ class FileExplorerController extends GetxController {
           absolutePath: directoryPath,
           relativePath: directoryPath,
           isDirectory: true);
-      FileNode parentNode = FileNode(parent, 0, false);
+      FileNode parentNode = FileNode(
+          value: parent, depth: 0, showChildren: false, markAsDeleted: false);
       await retrieveFilesInDirectory(parentNode, parentNode.depth);
       currentFilesTree.value = parentNode;
     }
@@ -35,10 +38,18 @@ class FileExplorerController extends GetxController {
         await fileSystemManager.retrieveFiles(fileNode.value.absolutePath);
     for (var file in filesInDirectory) {
       if (!file.isDirectory) {
-        FileNode newFileNode = FileNode(file, depth, false);
+        FileNode newFileNode = FileNode(
+            value: file,
+            depth: depth,
+            showChildren: false,
+            markAsDeleted: false);
         fileNode.add(newFileNode);
       } else {
-        FileNode newFileNode = FileNode(file, depth, false);
+        FileNode newFileNode = FileNode(
+            value: file,
+            depth: depth,
+            showChildren: false,
+            markAsDeleted: false);
         fileNode.add(newFileNode);
         await retrieveFilesInDirectory(newFileNode, depth + 1);
       }
@@ -51,7 +62,8 @@ class FileExplorerController extends GetxController {
           absolutePath: selectedPath.value,
           relativePath: selectedPath.value,
           isDirectory: true);
-      FileNode parentNode = FileNode(parent, 0, false);
+      FileNode parentNode = FileNode(
+          value: parent, depth: 0, showChildren: false, markAsDeleted: false);
       await retrieveFilesInDirectory(parentNode, parentNode.depth);
       currentFilesTree.value = parentNode;
     }
@@ -64,6 +76,8 @@ class FileExplorerController extends GetxController {
 
   void removeFile(FileNode fileNode) {
     fileSystemManager.removeFile(fileNode.value.absolutePath);
+    fileNode.markAsDeleted = true;
+    update();
   }
 
   void createFile(FileNode fileNode, String fileName) {

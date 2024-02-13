@@ -5,8 +5,13 @@ class FileNode {
   int depth;
   bool showChildren;
   List<FileNode> children = [];
+  bool markAsDeleted;
 
-  FileNode(this.value, this.depth, this.showChildren);
+  FileNode(
+      {required this.value,
+      required this.depth,
+      required this.showChildren,
+      required this.markAsDeleted});
 
   void add(FileNode child) {
     children.add(child);

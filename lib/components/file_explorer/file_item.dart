@@ -90,7 +90,6 @@ class _FileItemState extends State<FileItem> {
     EditorController editorController = Get.put(EditorController());
 
     fileExplorerController.removeFile(widget.fileNode);
-    fileExplorerController.refreshFiles();
     editorController.closeOpenFile(widget.fileNode.value);
   }
 

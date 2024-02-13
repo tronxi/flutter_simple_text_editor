@@ -77,12 +77,14 @@ class _FileExplorerComponentState extends State<FileExplorerComponent> {
   List<Widget> _retrieveFiles(FileNode parent) {
     List<Widget> widgets = [];
     for (var fileNode in parent.children) {
-      if (!fileNode.value.isDirectory) {
-        widgets.add(FileItem(fileNode: fileNode));
-      } else {
-        widgets.add(DirectoryItem(fileNode: fileNode));
-        if (fileNode.showChildren) {
-          widgets.addAll(_retrieveFiles(fileNode));
+      if (!fileNode.markAsDeleted) {
+        if (!fileNode.value.isDirectory) {
+          widgets.add(FileItem(fileNode: fileNode));
+        } else {
+          widgets.add(DirectoryItem(fileNode: fileNode));
+          if (fileNode.showChildren) {
+            widgets.addAll(_retrieveFiles(fileNode));
+          }
         }
       }
     }

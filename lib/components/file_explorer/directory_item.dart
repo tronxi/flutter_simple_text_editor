@@ -144,7 +144,6 @@ class _DirectoryItemState extends State<DirectoryItem> {
     EditorController editorController = Get.put(EditorController());
 
     fileExplorerController.removeFile(widget.fileNode);
-    fileExplorerController.refreshFiles();
     editorController.closeOpenDirectory(widget.fileNode);
   }
 

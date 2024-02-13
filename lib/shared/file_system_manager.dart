@@ -62,7 +62,11 @@ class FileSystemManager {
     newFile.createSync();
     FileModel fileModel = FileModel(
         absolutePath: newFilePath, relativePath: fileName, isDirectory: false);
-    return FileNode(fileModel, fileNode.depth + 1, false);
+    return FileNode(
+        value: fileModel,
+        depth: fileNode.depth + 1,
+        showChildren: false,
+        markAsDeleted: false);
   }
 
   FileNode createFolder(FileNode fileNode, String folderName) {
@@ -73,6 +77,10 @@ class FileSystemManager {
         absolutePath: newFolderPath,
         relativePath: folderName,
         isDirectory: true);
-    return FileNode(fileModel, fileNode.depth + 1, false);
+    return FileNode(
+        value: fileModel,
+        depth: fileNode.depth + 1,
+        showChildren: false,
+        markAsDeleted: false);
   }
 }
