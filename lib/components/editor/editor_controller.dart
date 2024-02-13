@@ -57,10 +57,10 @@ class EditorController extends GetxController {
   }
 
   void closeOpenDirectory(FileNode fileNode) {
-    if(!fileNode.value.isDirectory) {
+    if (!fileNode.value.isDirectory) {
       closeOpenFile(fileNode.value);
     } else {
-      for(var child in fileNode.children) {
+      for (var child in fileNode.children) {
         closeOpenDirectory(child);
       }
     }

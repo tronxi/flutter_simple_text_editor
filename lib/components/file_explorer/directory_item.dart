@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_controller.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_explorer_controller.dart';
+import 'package:flutter_simple_text_editor/components/file_explorer/file_name_dialog.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_node.dart';
 import 'package:get/get.dart';
 import 'package:flutter_simple_text_editor/shared/colors.dart';
@@ -75,7 +76,7 @@ class _DirectoryItemState extends State<DirectoryItem> {
         color: Theme.of(context).editorBackground,
         items: [
           PopupMenuItem(
-            onTap: _onNewFile,
+            onTap: () => _showFileNameDialog(context),
             child: Text("New File",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -108,10 +109,20 @@ class _DirectoryItemState extends State<DirectoryItem> {
         ]);
   }
 
-  void _onNewFile() {
-    FileExplorerController fileExplorerController =
-        Get.put(FileExplorerController());
-    fileExplorerController.createFile(widget.fileNode, "fileName"); //TODO create dialog for fileName
+  void _onNewFile(BuildContext context) {
+    _showFileNameDialog(context);
+  }
+
+  Future<void> _showFileNameDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return FileNameDialog(onSelect: (String fileName) {
+            FileExplorerController fileExplorerController =
+                Get.put(FileExplorerController());
+            fileExplorerController.createFile(widget.fileNode, fileName);
+          });
+        });
   }
 
   void _onDelete() {
