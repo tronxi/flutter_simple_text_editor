@@ -83,7 +83,7 @@ class _DirectoryItemState extends State<DirectoryItem> {
                     color: Theme.of(context).editorFontColor)),
           ),
           PopupMenuItem(
-            onTap: () => {},
+            onTap: () => _showFolderNameDialog(context),
             child: Text("New Folder",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -109,19 +109,32 @@ class _DirectoryItemState extends State<DirectoryItem> {
         ]);
   }
 
-  void _onNewFile(BuildContext context) {
-    _showFileNameDialog(context);
-  }
-
   Future<void> _showFileNameDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
-          return FileNameDialog(onSelect: (String fileName) {
-            FileExplorerController fileExplorerController =
-                Get.put(FileExplorerController());
-            fileExplorerController.createFile(widget.fileNode, fileName);
-          });
+          return FileNameDialog(
+              title: "File Name",
+              onSelect: (String fileName) {
+                FileExplorerController fileExplorerController =
+                    Get.put(FileExplorerController());
+                fileExplorerController.createFile(widget.fileNode, fileName);
+              });
+        });
+  }
+
+  Future<void> _showFolderNameDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return FileNameDialog(
+              title: "Folder Name",
+              onSelect: (String folderName) {
+                FileExplorerController fileExplorerController =
+                    Get.put(FileExplorerController());
+                fileExplorerController.createFolder(
+                    widget.fileNode, folderName);
+              });
         });
   }
 

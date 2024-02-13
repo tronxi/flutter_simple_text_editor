@@ -64,4 +64,15 @@ class FileSystemManager {
         absolutePath: newFilePath, relativePath: fileName, isDirectory: false);
     return FileNode(fileModel, fileNode.depth + 1, false);
   }
+
+  FileNode createFolder(FileNode fileNode, String folderName) {
+    String newFolderPath = path.join(fileNode.value.absolutePath, folderName);
+    Directory newFolder = Directory(newFolderPath);
+    newFolder.createSync();
+    FileModel fileModel = FileModel(
+        absolutePath: newFolderPath,
+        relativePath: folderName,
+        isDirectory: true);
+    return FileNode(fileModel, fileNode.depth + 1, false);
+  }
 }

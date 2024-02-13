@@ -71,4 +71,10 @@ class FileExplorerController extends GetxController {
     fileNode.add(newFileNode);
     update();
   }
+
+  void createFolder(FileNode fileNode, String folderName) {
+    FileNode newFileNode = fileSystemManager.createFolder(fileNode, folderName);
+    fileNode.add(newFileNode);
+    update();
+  }
 }

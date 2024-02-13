@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class FileNameDialog extends StatelessWidget {
   final Function(String fileName) onSelect;
+  final String title;
   final TextEditingController textEditingController = TextEditingController();
-  FileNameDialog({super.key, required this.onSelect});
+  FileNameDialog({super.key, required this.title, required this.onSelect});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("File name"),
+      title: Text(title),
       content: TextFormField(
         autofocus: true,
         controller: textEditingController,
