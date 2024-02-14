@@ -65,4 +65,20 @@ class EditorController extends GetxController {
       }
     }
   }
+
+  void updateFileModelIfExist(FileModel oldFileModel, FileModel newFileModel) {
+    if (openedFiles.containsKey(oldFileModel)) {
+      if (oldFileModel == openedFile.value) {
+        final fileController = openedFiles.remove(oldFileModel);
+        openedFiles.putIfAbsent(newFileModel, () => fileController!);
+        openedFile.value = newFileModel;
+        fileController!.setCurrentFileForOpenedFile(newFileModel);
+      } else {
+        final fileController = openedFiles.remove(oldFileModel);
+        openedFiles.putIfAbsent(newFileModel, () => fileController!);
+        fileController!.setCurrentFileForOpenedFile(newFileModel);
+      }
+      update();
+    }
+  }
 }

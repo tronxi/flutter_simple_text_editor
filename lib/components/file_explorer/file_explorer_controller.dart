@@ -91,4 +91,11 @@ class FileExplorerController extends GetxController {
     fileNode.add(newFileNode);
     update();
   }
+
+  void renameFile(FileNode fileNode, String newFileName) {
+    FileModel newFileModel =
+        fileSystemManager.renameFile(fileNode, newFileName);
+    fileNode.value = newFileModel;
+    update();
+  }
 }
