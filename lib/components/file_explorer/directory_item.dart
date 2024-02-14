@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_controller.dart';
+import 'package:flutter_simple_text_editor/components/file_explorer/create_files_helper.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_explorer_controller.dart';
-import 'package:flutter_simple_text_editor/components/file_explorer/file_name_dialog.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_node.dart';
 import 'package:get/get.dart';
 import 'package:flutter_simple_text_editor/shared/colors.dart';
@@ -76,14 +76,16 @@ class _DirectoryItemState extends State<DirectoryItem> {
         color: Theme.of(context).editorBackground,
         items: [
           PopupMenuItem(
-            onTap: () => _showFileNameDialog(context),
+            onTap: () =>
+                CreateFilesHelper.showFileNameDialog(context, widget.fileNode),
             child: Text("New File",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).editorFontColor)),
           ),
           PopupMenuItem(
-            onTap: () => _showFolderNameDialog(context),
+            onTap: () => CreateFilesHelper.showFolderNameDialog(
+                context, widget.fileNode),
             child: Text("New Folder",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -107,35 +109,6 @@ class _DirectoryItemState extends State<DirectoryItem> {
                     color: Theme.of(context).editorFontColor)),
           )
         ]);
-  }
-
-  Future<void> _showFileNameDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return FileNameDialog(
-              title: "File Name",
-              onSelect: (String fileName) {
-                FileExplorerController fileExplorerController =
-                    Get.put(FileExplorerController());
-                fileExplorerController.createFile(widget.fileNode, fileName);
-              });
-        });
-  }
-
-  Future<void> _showFolderNameDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return FileNameDialog(
-              title: "Folder Name",
-              onSelect: (String folderName) {
-                FileExplorerController fileExplorerController =
-                    Get.put(FileExplorerController());
-                fileExplorerController.createFolder(
-                    widget.fileNode, folderName);
-              });
-        });
   }
 
   void _onDelete() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_text_editor/components/file_explorer/create_files_helper.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/directory_item.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_explorer_button.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_item.dart';
@@ -46,6 +47,28 @@ class _FileExplorerComponentState extends State<FileExplorerComponent> {
               const SizedBox(width: 10),
             ],
           ),
+          const SizedBox(height: 10),
+          Obx(() {
+            if (controller.selectedPath.isNotEmpty) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FileExplorerButton(
+                      text: "New File",
+                      onPressed: () => CreateFilesHelper.showFileNameDialog(
+                          context, controller.currentFilesTree.value)),
+                  const SizedBox(width: 10),
+                  FileExplorerButton(
+                      text: "New Folder",
+                      onPressed: () => CreateFilesHelper.showFolderNameDialog(
+                          context, controller.currentFilesTree.value)),
+                  const SizedBox(width: 10),
+                ],
+              );
+            } else {
+              return Container();
+            }
+          }),
           const SizedBox(height: 10),
           Obx(() => Text(controller.selectedDirectoryName.value,
               style: TextStyle(
