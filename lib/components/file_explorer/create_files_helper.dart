@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class CreateFilesHelper {
   static Future<void> showFileNameDialog(
-      BuildContext context, FileNode fileNode) {
+      BuildContext context, FileNode fileNode, bool isInParent) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -15,13 +15,14 @@ class CreateFilesHelper {
               onSelect: (String fileName) {
                 FileExplorerController fileExplorerController =
                     Get.put(FileExplorerController());
-                fileExplorerController.createFile(fileNode, fileName);
+                fileExplorerController.createFile(
+                    fileNode, fileName, isInParent);
               });
         });
   }
 
   static Future<void> showFolderNameDialog(
-      BuildContext context, FileNode fileNode) {
+      BuildContext context, FileNode fileNode, bool isInParent) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -30,7 +31,8 @@ class CreateFilesHelper {
               onSelect: (String folderName) {
                 FileExplorerController fileExplorerController =
                     Get.put(FileExplorerController());
-                fileExplorerController.createFolder(fileNode, folderName);
+                fileExplorerController.createFolder(
+                    fileNode, folderName, isInParent);
               });
         });
   }

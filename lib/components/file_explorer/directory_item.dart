@@ -76,8 +76,8 @@ class _DirectoryItemState extends State<DirectoryItem> {
         color: Theme.of(context).editorBackground,
         items: [
           PopupMenuItem(
-            onTap: () =>
-                CreateFilesHelper.showFileNameDialog(context, widget.fileNode),
+            onTap: () => CreateFilesHelper.showFileNameDialog(
+                context, widget.fileNode, false),
             child: Text("New File",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class _DirectoryItemState extends State<DirectoryItem> {
           ),
           PopupMenuItem(
             onTap: () => CreateFilesHelper.showFolderNameDialog(
-                context, widget.fileNode),
+                context, widget.fileNode, false),
             child: Text("New Folder",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,

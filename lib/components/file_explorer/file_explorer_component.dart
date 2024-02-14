@@ -56,12 +56,12 @@ class _FileExplorerComponentState extends State<FileExplorerComponent> {
                   FileExplorerButton(
                       text: "New File",
                       onPressed: () => CreateFilesHelper.showFileNameDialog(
-                          context, controller.currentFilesTree.value)),
+                          context, controller.currentFilesTree.value, true)),
                   const SizedBox(width: 10),
                   FileExplorerButton(
                       text: "New Folder",
                       onPressed: () => CreateFilesHelper.showFolderNameDialog(
-                          context, controller.currentFilesTree.value)),
+                          context, controller.currentFilesTree.value, true)),
                   const SizedBox(width: 10),
                 ],
               );

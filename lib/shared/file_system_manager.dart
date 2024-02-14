@@ -56,20 +56,26 @@ class FileSystemManager {
     file.deleteSync(recursive: true);
   }
 
-  FileNode createFile(FileNode fileNode, String fileName) {
+  FileNode createFile(FileNode fileNode, String fileName, bool isInParent) {
     String newFilePath = path.join(fileNode.value.absolutePath, fileName);
     File newFile = File(newFilePath);
     newFile.createSync();
     FileModel fileModel = FileModel(
         absolutePath: newFilePath, relativePath: fileName, isDirectory: false);
+    int depth;
+    if (isInParent) {
+      depth = 0;
+    } else {
+      depth = 1;
+    }
     return FileNode(
         value: fileModel,
-        depth: fileNode.depth + 1,
+        depth: fileNode.depth + depth,
         showChildren: false,
         markAsDeleted: false);
   }
 
-  FileNode createFolder(FileNode fileNode, String folderName) {
+  FileNode createFolder(FileNode fileNode, String folderName, bool isInParent) {
     String newFolderPath = path.join(fileNode.value.absolutePath, folderName);
     Directory newFolder = Directory(newFolderPath);
     newFolder.createSync();
@@ -77,9 +83,15 @@ class FileSystemManager {
         absolutePath: newFolderPath,
         relativePath: folderName,
         isDirectory: true);
+    int depth;
+    if (isInParent) {
+      depth = 0;
+    } else {
+      depth = 1;
+    }
     return FileNode(
         value: fileModel,
-        depth: fileNode.depth + 1,
+        depth: fileNode.depth + depth,
         showChildren: false,
         markAsDeleted: false);
   }
