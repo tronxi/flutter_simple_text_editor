@@ -14,7 +14,8 @@ class EditorController extends GetxController {
     openedFile.value = current;
     if (openedFiles[openedFile.value] == null) {
       openedFiles.putIfAbsent(current, () => FileController());
-      openedFiles[current]?.setCurrentFileForFirstTime(current);
+      openedFiles[current]
+          ?.setCurrentFileForFirstTime(current, openedFiles.entries.length);
     } else {
       openedFiles.putIfAbsent(current, () => FileController());
       openedFiles[current]?.setCurrentFileForOpenedFile(current);
@@ -39,7 +40,12 @@ class EditorController extends GetxController {
   }
 
   List<FileModel> retrieveOpenedFilesNames(FileModel opened) {
-    return openedFiles.keys.toList();
+    List<MapEntry<FileModel, FileController>> entries =
+        openedFiles.entries.toList();
+    entries.sort((a, b) =>
+        a.value.currentPosition.value.compareTo(b.value.currentPosition.value));
+    List<FileModel> sortedKeys = entries.map((entry) => entry.key).toList();
+    return sortedKeys;
   }
 
   bool isCurrentOpened(FileModel fileModel) {

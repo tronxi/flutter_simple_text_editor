@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_area_painter.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_controller.dart';
+import 'package:flutter_simple_text_editor/components/editor/file_controller.dart';
 import 'package:flutter_simple_text_editor/shared/colors.dart';
 import 'package:flutter_simple_text_editor/shared/file_model.dart';
 import 'package:get/get.dart';
@@ -10,19 +11,14 @@ class EditorArea extends StatelessWidget {
   final FileModel fileModel;
   EditorArea(
       {super.key, required this.editorController, required this.fileModel}) {
-    editorController
-        .getOpened(fileModel)!
-        .currentFileController
-        .value
-        .addListener(() {
-      int currentOffset = editorController
-          .getOpened(fileModel)!
-          .currentFileController
-          .value
-          .selection
-          .baseOffset;
-      editorController.getOpened(fileModel)!.setCurrentOffset(currentOffset);
-    });
+    FileController? fileController = editorController.getOpened(fileModel);
+    if (fileController != null) {
+      fileController.currentFileController.value.addListener(() {
+        int currentOffset =
+            fileController.currentFileController.value.selection.baseOffset;
+        fileController.setCurrentOffset(currentOffset);
+      });
+    }
   }
 
   @override

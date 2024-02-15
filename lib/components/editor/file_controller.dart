@@ -11,11 +11,13 @@ class FileController {
   var currentOffset = 0.obs;
   var currentFileController = TextEditingController().obs;
   var needSave = false.obs;
+  var currentPosition = 0.obs;
 
-  void setCurrentFileForFirstTime(FileModel current) async {
+  void setCurrentFileForFirstTime(FileModel current, int position) async {
     currentFile.value = current;
     needSave.value = false;
     currentOffset.value = 0;
+    currentPosition.value = position;
     currentFileContent =
         await fileSystemManager.retrieveFile(current.absolutePath);
     currentFileController.value =
@@ -37,6 +39,6 @@ class FileController {
   void save() {
     fileSystemManager.save(
         currentFile.value.absolutePath, currentFileController.value.text);
-    setCurrentFileForFirstTime(currentFile.value);
+    setCurrentFileForFirstTime(currentFile.value, currentPosition.value);
   }
 }
