@@ -100,4 +100,12 @@ class FileExplorerController extends GetxController {
     fileNode.value = newFileModel;
     update();
   }
+
+  void renameFolder(FileNode fileNode, String newFolderName) {
+    FileModel newFileModel =
+    fileSystemManager.renameFolder(fileNode, newFolderName);
+    fileNode.value = newFileModel;
+    //TODO rename children recursive
+    update();
+  }
 }

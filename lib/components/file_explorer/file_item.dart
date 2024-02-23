@@ -100,7 +100,8 @@ class _FileItemState extends State<FileItem> {
                 FileModel oldFileModel = widget.fileNode.value;
                 fileExplorerController.renameFile(widget.fileNode, newFileName);
                 FileModel newFileModel = widget.fileNode.value;
-                editorController.updateFileModelIfExist(oldFileModel, newFileModel);
+                editorController.updateFileModelIfExist(
+                    oldFileModel, newFileModel);
               });
         });
   }
