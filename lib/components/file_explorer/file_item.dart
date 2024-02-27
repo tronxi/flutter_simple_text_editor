@@ -41,8 +41,7 @@ class _FileItemState extends State<FileItem> {
             SizedBox(width: widget.fileNode.depth * 20.0),
             Text(widget.fileNode.value.relativePath,
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                     color: isHover
                         ? Theme.of(context).fileExplorerItemSelected
                         : Theme.of(context).fileExplorerItemUnselected)),
@@ -100,7 +99,8 @@ class _FileItemState extends State<FileItem> {
                 FileModel oldFileModel = widget.fileNode.value;
                 fileExplorerController.renameFile(widget.fileNode, newFileName);
                 FileModel newFileModel = widget.fileNode.value;
-                editorController.updateFileModelIfExist(oldFileModel, newFileModel);
+                editorController.updateFileModelIfExist(
+                    oldFileModel, newFileModel);
               });
         });
   }
