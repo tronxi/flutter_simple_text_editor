@@ -42,14 +42,13 @@ class _DirectoryItemState extends State<DirectoryItem> {
             SizedBox(width: widget.fileNode.depth * 20.0),
             Text(widget.fileNode.showChildren ? "▼ " : "▶ ",
                 style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 10,
                     color: isHover
                         ? Theme.of(context).fileExplorerItemSelected
                         : Theme.of(context).fileExplorerItemUnselected)),
             Text(widget.fileNode.value.relativePath,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 14,
                     color: isHover
                         ? Theme.of(context).fileExplorerItemSelected
                         : Theme.of(context).fileExplorerItemUnselected)),

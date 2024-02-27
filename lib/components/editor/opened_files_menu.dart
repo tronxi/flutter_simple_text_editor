@@ -13,7 +13,7 @@ class OpenedFilesMenu extends StatelessWidget {
     return GetBuilder<EditorController>(builder: (controller) {
       return Obx(() => Container(
             width: double.infinity,
-            color: Theme.of(context).editorFileTab,
+            color: Theme.of(context).editorBackground,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
