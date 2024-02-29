@@ -70,9 +70,9 @@ class EditorArea extends StatelessWidget {
   double _calculateHeight(BuildContext context) {
     TextScaler textScaler = MediaQuery.of(context).textScaler;
     double scale = double.parse((textScaler.scale(12) / 12).toStringAsFixed(1));
-    if(scale > 100) {
+    if(scale > 1.0) {
       return 0.85;
-    } else if(scale < 100) {
+    } else if(scale < 1.0) {
       return 1.5;
     }
     return 1.1;

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_simple_text_editor/components/editor/editor_controller.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/create_files_helper.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_explorer_controller.dart';
+import 'package:flutter_simple_text_editor/components/file_explorer/file_name_dialog.dart';
 import 'package:flutter_simple_text_editor/components/file_explorer/file_node.dart';
+import 'package:flutter_simple_text_editor/shared/file_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter_simple_text_editor/shared/colors.dart';
 
@@ -95,6 +97,7 @@ class _DirectoryItemState extends State<DirectoryItem> {
             height: 1,
           )),
           PopupMenuItem(
+            onTap: () => _onRename(context),
             child: Text("Rename",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -108,6 +111,26 @@ class _DirectoryItemState extends State<DirectoryItem> {
                     color: Theme.of(context).editorFontColor)),
           )
         ]);
+  }
+
+  Future<void> _onRename(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return FileNameDialog(
+              title: "New Name",
+              onSelect: (String newFileName) {
+                FileExplorerController fileExplorerController =
+                    Get.put(FileExplorerController());
+                EditorController editorController = Get.put(EditorController());
+                FileModel oldFileModel = widget.fileNode.value;
+                fileExplorerController.renameFolder(
+                    widget.fileNode, newFileName);
+                FileModel newFileModel = widget.fileNode.value;
+                editorController.updateFileModelIfExist(
+                    oldFileModel, newFileModel);
+              });
+        });
   }
 
   void _onDelete() {

@@ -106,4 +106,15 @@ class FileSystemManager {
         relativePath: newFileName,
         isDirectory: false);
   }
+
+  FileModel renameFolder(FileNode fileNode, String newFolderName) {
+    final String originalFilePath = fileNode.value.absolutePath;
+    final String directoryPath = Directory(originalFilePath).parent.path;
+    final String newFilePath = '$directoryPath/$newFolderName';
+    Directory(originalFilePath).renameSync(newFilePath);
+    return FileModel(
+        absolutePath: newFilePath,
+        relativePath: newFolderName,
+        isDirectory: true);
+  }
 }
