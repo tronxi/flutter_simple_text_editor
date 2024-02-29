@@ -1,3 +1,4 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 
 extension Colors on ThemeData {
@@ -47,5 +48,32 @@ extension Colors on ThemeData {
 
   Color get editorFileTab {
     return const Color.fromRGBO(37, 53, 56, 1);
+  }
+
+  Color get closeButtonColor {
+    return const Color.fromRGBO(255, 34, 34, 1.0);
+  }
+
+  Color get closeButtonColorDown {
+    return const Color.fromRGBO(157, 24, 24, 1.0);
+  }
+
+  WindowButtonColors get windowButtonColor {
+    return WindowButtonColors(
+        iconNormal: fileExplorerBorder,
+        iconMouseOver: editorFontColor,
+        iconMouseDown: editorFontColor,
+        mouseOver: primaryCustomColor,
+        mouseDown: openFolderBackground);
+  }
+
+  WindowButtonColors get windowCloseButtonColor {
+    return WindowButtonColors(
+      iconNormal: fileExplorerBorder,
+      iconMouseOver: editorFontColor,
+      iconMouseDown: editorFontColor,
+      mouseOver: closeButtonColor,
+      mouseDown: closeButtonColorDown,
+    );
   }
 }

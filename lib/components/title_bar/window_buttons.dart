@@ -1,5 +1,6 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_text_editor/shared/colors.dart';
 
 class WindowButtons extends StatefulWidget {
   const WindowButtons({super.key});
@@ -19,15 +20,17 @@ class _WindowButtonsState extends State<WindowButtons> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        MinimizeWindowButton(),
+        MinimizeWindowButton(colors: Theme.of(context).windowButtonColor),
         appWindow.isMaximized
             ? RestoreWindowButton(
+                colors: Theme.of(context).windowButtonColor,
                 onPressed: maximizeOrRestore,
               )
             : MaximizeWindowButton(
+                colors: Theme.of(context).windowButtonColor,
                 onPressed: maximizeOrRestore,
               ),
-        CloseWindowButton(),
+        CloseWindowButton(colors: Theme.of(context).windowCloseButtonColor),
       ],
     );
   }
