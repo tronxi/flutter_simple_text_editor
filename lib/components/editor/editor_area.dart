@@ -54,7 +54,7 @@ class EditorArea extends StatelessWidget {
                     color: Theme.of(context).editorFontColor,
                     fontSize: 12,
                     letterSpacing: 0.5,
-                    height: 1.1,
+                    height: _calculateHeight(context),
                     fontWeight: FontWeight.normal,
                     leadingDistribution: TextLeadingDistribution.proportional),
                 decoration: const InputDecoration(
@@ -65,5 +65,16 @@ class EditorArea extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  double _calculateHeight(BuildContext context) {
+    TextScaler textScaler = MediaQuery.of(context).textScaler;
+    double scale = double.parse((textScaler.scale(12) / 12).toStringAsFixed(1));
+    if(scale > 100) {
+      return 0.85;
+    } else if(scale < 100) {
+      return 1.5;
+    }
+    return 1.1;
   }
 }
