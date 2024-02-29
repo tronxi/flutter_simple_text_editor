@@ -50,22 +50,30 @@ extension Colors on ThemeData {
     return const Color.fromRGBO(37, 53, 56, 1);
   }
 
+  Color get closeButtonColor {
+    return const Color.fromRGBO(255, 34, 34, 1.0);
+  }
+
+  Color get closeButtonColorDown {
+    return const Color.fromRGBO(157, 24, 24, 1.0);
+  }
+
   WindowButtonColors get windowButtonColor {
     return WindowButtonColors(
-        iconNormal: const Color(0xFF805306),
-        iconMouseOver: const Color(0xFF805306),
-        iconMouseDown: const Color(0xFFFFD500),
-        mouseOver: const Color(0xFFF6A00C),
-        mouseDown: const Color(0xFF805306));
+        iconNormal: fileExplorerBorder,
+        iconMouseOver: editorFontColor,
+        iconMouseDown: editorFontColor,
+        mouseOver: primaryCustomColor,
+        mouseDown: openFolderBackground);
   }
 
   WindowButtonColors get windowCloseButtonColor {
     return WindowButtonColors(
-      iconNormal: const Color(0xFF805306),
-      iconMouseOver: const Color(0xFF805306),
-      iconMouseDown: const Color(0xFFFFD500),
-      mouseOver: const Color(0xFFF6A00C),
-      mouseDown: const Color(0xFF805306),
+      iconNormal: fileExplorerBorder,
+      iconMouseOver: editorFontColor,
+      iconMouseDown: editorFontColor,
+      mouseOver: closeButtonColor,
+      mouseDown: closeButtonColorDown,
     );
   }
 }
